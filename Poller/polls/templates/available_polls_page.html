@@ -61,19 +61,15 @@
 
 <body>
     <div class="poll-container">
+        {% for question in questions%}
         <div class="poll">
-            <h2>Question 1: What is your favorite color?</h2>
+            <h2>Question {{forloop.counter}}: {{question.question_text}}</h2>
             <div class="button-group">
-                <a href="/vote/1" class="button">Vote</a>
+                <a href={% url 'voting_page' %} class="button">Vote</a>
                 <a href="/results/1" class="button">See Results</a>
             </div>
-        </div>
-        <div class="poll">
-            <h2>Question 2: What is your favorite season?</h2>
-            <div class="button-group">
-                <a href="/vote/2" class="button">Vote</a>
-                <a href="/results/2" class="button">See Results</a>
-            </div>
+            {% endfor %}
+
         </div>
     </div>
 </body>
