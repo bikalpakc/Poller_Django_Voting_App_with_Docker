@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page , name='home_page'),
     path('available-polls/', available_polls_page , name='available_polls_page'),
-    path('voting/', voting_page , name='voting_page'),
+    path('voting/<id>/', voting_page , name='voting_page'),
+    path('voted/<id>/', post_vote_page , name='post_vote_page'),
+    path('result/<id>', result_page , name='result_page'),
 ]

@@ -61,12 +61,13 @@
 
 <body>
     <div class="poll-container">
+        {% csrf_token %}
         {% for question in questions%}
         <div class="poll">
             <h2>Question {{forloop.counter}}: {{question.question_text}}</h2>
             <div class="button-group">
-                <a href={% url 'voting_page' %} class="button">Vote</a>
-                <a href="/results/1" class="button">See Results</a>
+                <a href={% url 'voting_page' question.id %} class="button">Vote</a>
+                <a href={% url 'result_page' question.id %} class="button">See Results</a>
             </div>
             {% endfor %}
 

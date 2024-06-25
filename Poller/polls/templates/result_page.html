@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poller - Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .result {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .choice {
+            color: #555;
+        }
+
+        .votes {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Result</h1>
+        {% for choice in questions.choices_set.all %}
+        <div class="result">
+            <div class="choice">{{choice.choice_text}}:</div>
+            <div class="votes">{{choice.votes}}</div>
+        </div>
+        {% endfor %}
+
+        <a href={% url 'available_polls_page' %} class="back-button">Back to Polls</a>
+    </div>
+</body>
+
+</html>

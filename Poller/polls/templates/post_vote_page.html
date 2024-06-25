@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poller - Voted</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .icon {
+            width: 100px;
+            height: 100px;
+            background-color: #28a745;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon svg {
+            width: 50px;
+            height: 50px;
+            fill: #fff;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-polls {
+            background-color: #007bff;
+        }
+
+        .button-polls:hover {
+            background-color: #0056b3;
+        }
+
+        .button-results {
+            background-color: #28a745;
+        }
+
+        .button-results:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="icon-container">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path
+                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05L8.5 10.5l-2.75-2.75a.75.75 0 0 1 1.07-1.05l1.68 1.68 3.47-3.47z" />
+                </svg>
+            </div>
+        </div>
+        <h1>Voted</h1>
+        <div class="button-group">
+            <a href={% url 'available_polls_page' %} class="button button-polls">See Available Polls</a>
+            <a href={% url 'result_page' questions.id %} class="button button-results">See Results</a>
+        </div>
+    </div>
+</body>
+
+</html>
