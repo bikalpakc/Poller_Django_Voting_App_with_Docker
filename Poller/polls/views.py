@@ -1,4 +1,6 @@
-from django.shortcuts import redirect, render
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from .models import *
 # Create your views here.
 
@@ -12,23 +14,23 @@ def available_polls_page(request):
     return render(request, "available_polls_page.html", {'questions': queryset})
 
 def voting_page(request, id):
+    question = get_object_or_404(Question, pk=id)
     if request.method=="POST":
-        Question.objects.get(pk=id)
-        voted_choice=request.POST.get('voted_choice')
-        selected_choice_object=Choices.objects.get(choice_text=voted_choice)
-        selected_choice_object.votes=int(selected_choice_object.votes) + 1
-        selected_choice_object.save()
-        Choices.save()
 
-        return redirect("/voted/")
+        selected_choice = question.choices_set.get(pk=request.POST['voted_choice'])
+        # print(selected_choice)
+        selected_choice.votes += 1
+        selected_choice.save()
+
+        return HttpResponseRedirect(reverse('post_vote_page', args=(question.id,)))
 
 
 
 
     # queryset=Choices.objects.all()
-    queryset= Question.objects.get(pk=id)
+    # queryset= Question.objects.get(pk=id)
     # print(queryset)
-    return render(request, "voting_page.html", {'questions': queryset})
+    return render(request, "voting_page.html", {'questions': question})
 
 
 def post_vote_page(request, id):

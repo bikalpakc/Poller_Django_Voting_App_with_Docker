@@ -17,6 +17,8 @@
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
+
+
         }
 
         .poll {
@@ -60,19 +62,20 @@
 </head>
 
 <body>
-    <div class="poll-container">
-        {% csrf_token %}
-        {% for question in questions%}
-        <div class="poll">
-            <h2>Question {{forloop.counter}}: {{question.question_text}}</h2>
-            <div class="button-group">
-                <a href={% url 'voting_page' question.id %} class="button">Vote</a>
-                <a href={% url 'result_page' question.id %} class="button">See Results</a>
-            </div>
-            {% endfor %}
+    <h1 style="text-align: center;">Available Polls</h4>
+        <div class="poll-container">
+            {% csrf_token %}
+            {% for question in questions%}
+            <div class="poll">
+                <h2>Question {{forloop.counter}}: {{question.question_text}}</h2>
+                <div class="button-group">
+                    <a href={% url 'voting_page' question.id %} class="button">Vote</a>
+                    <a href={% url 'result_page' question.id %} class="button">See Results</a>
+                </div>
+                {% endfor %}
 
+            </div>
         </div>
-    </div>
 </body>
 
 </html>

@@ -84,12 +84,12 @@
             {% csrf_token %}
             {% for choice in questions.choices_set.all %}
             <div class="option">
-                <input type="radio" id="color1" name="voted_choice" value="{{choice.choice_text}}">
+                <input type="radio" id="choice{{ forloop.counter }}" name="voted_choice" value="{{choice.id}}">
                 <label for="color1">{{choice.choice_text}}</label>
             </div>
             {% endfor %}
 
-            <a href={% url 'post_vote_page' questions.id %} class="button">Vote</a>
+            <button type="submit" class="button">Vote</button>
         </form>
         <a href={% url 'available_polls_page' %} class="back-button">
             <span class="back-symbol">&#x21A9;</span> Go Back
