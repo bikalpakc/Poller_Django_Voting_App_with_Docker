@@ -27,4 +27,5 @@ urlpatterns = [
     path('voting/<id>/', voting_page , name='voting_page'),
     path('voted/<id>/', post_vote_page , name='post_vote_page'),
     path('result/<id>', result_page , name='result_page'),
+    path('resultsdata/<id>/', resultsData, name="resultsdata")
 ]

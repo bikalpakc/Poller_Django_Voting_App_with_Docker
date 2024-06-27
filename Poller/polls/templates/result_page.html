@@ -22,7 +22,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 450px;
         }
 
         h1 {
@@ -68,6 +68,9 @@
 </head>
 
 <body>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <div class="container">
         <h1>Result</h1>
         {% for choice in questions.choices_set.all %}
@@ -77,7 +80,66 @@
         </div>
         {% endfor %}
 
+        <div id="myChart">
+
+        </div>
+
         <a href={% url 'available_polls_page' %} class="back-button">Back to Polls</a>
+
+        <script>
+
+            var state = {
+                'items': [],
+                'values': [],
+            }
+
+            var objId = "{{questions.id}}"
+
+            var dataURL = `/resultsdata/${objId}/`
+            $.ajax({
+                method: 'GET',
+                url: dataURL,
+                success: function (response) {
+                    console.log('RESPONSE:', response)
+                    for (var i in response) {
+
+                        var key = Object.keys(response[i])[0]
+                        var value = Object.values(response[i])[0]
+
+                        state.items.push(key)
+                        state.values.push(value)
+                    }
+
+                    console.log('STATE:', state)
+                    buildChart()
+
+                }
+            })
+
+            function buildChart() {
+                var chartData = {
+                    "type": "bar",
+                    "scale-x": {
+                        "values": state.items
+                    },
+                    "series": [
+                        {
+                            "values": state.values
+                        }
+                    ]
+                }
+
+
+                zingchart.render({
+                    id: "myChart",
+                    data: chartData,
+                });
+            }
+
+
+
+
+        </script>
     </div>
 </body>
 

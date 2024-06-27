@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from .models import *
@@ -40,3 +40,15 @@ def post_vote_page(request, id):
 def result_page(request, id):
     queryset=Question.objects.get(pk=id)
     return render(request, "result_page.html", {'questions': queryset})
+
+def resultsData(request, id):
+    votedata = []
+
+    question = Question.objects.get(id=id)
+    votes = question.choices_set.all()
+
+    for i in votes:
+        votedata.append({i.choice_text:i.votes})
+
+    print(votedata)
+    return JsonResponse(votedata, safe=False)
